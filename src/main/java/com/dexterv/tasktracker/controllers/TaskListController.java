@@ -7,6 +7,8 @@ import com.dexterv.tasktracker.services.TaskListService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path="/task-lists")
@@ -25,14 +27,25 @@ public class TaskListController {
                 .map(taskListMapper::toDto)
                 .toList();
     }
-//
+
+    @GetMapping(path="/{task_list_id}")
+    public Optional<TaskListDto> getTaskListsById(@PathVariable("task_list_id") UUID task_list_id) {
+        return taskListService.getTaskListById(task_list_id).map(taskListMapper::toDto);
+    }
+    
+    @PutMapping("/{task_list_id}")
+    public TaskList updateTaskList(@PathVariable("task_list_id") UUID task_list_id, @RequestBody TaskListDto taskListDto) {
+        return taskListService.updateTaskList(task_list_id, taskListMapper.fromDto(taskListDto));
+    }
+    
+    
     @PostMapping
     public TaskListDto createTaskList(@RequestBody TaskListDto taskListDto) {
-//        return taskListService.addTaskList(taskList);
-        TaskList taskList = taskListMapper.fromDto(taskListDto);
-        System.out.println(taskList.toString());
-        TaskList savedTaskList = taskListService.createTaskList(taskList);
-        System.out.println(savedTaskList.toString());
+
+        TaskList savedTaskList = taskListService.createTaskList(
+                taskListMapper.fromDto(taskListDto)
+        );
+
         return taskListMapper.toDto(savedTaskList);
 
     }
