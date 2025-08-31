@@ -1,7 +1,6 @@
 package com.dexterv.tasktracker.services;
 
 import com.dexterv.tasktracker.domain.entities.TaskList;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;

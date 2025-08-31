@@ -15,8 +15,8 @@ import java.util.UUID;
 @RequestMapping(path="/task-lists")
 public class TaskListController {
 
-    private TaskListService taskListService;
-    private TaskListMapper taskListMapper;
+    private final TaskListService taskListService;
+    private final TaskListMapper taskListMapper;
     public TaskListController(TaskListService taskListService, TaskListMapper taskListMapper) {
         this.taskListService = taskListService;
         this.taskListMapper = taskListMapper;
@@ -50,10 +50,8 @@ public class TaskListController {
     public ResponseEntity<String> deleteTaskList(@PathVariable("task_list_id") UUID taskListId) {
 
        taskListService.deleteTaskListById(taskListId);
-       //       return ResponseEntity.ok("Task list with id " + taskListId + " has been deleted successfully.");
         return ResponseEntity.noContent().build(); // Returns 204 No Content
     }
-    
     
     @PostMapping
     public TaskListDto createTaskList(@RequestBody TaskListDto taskListDto) {
