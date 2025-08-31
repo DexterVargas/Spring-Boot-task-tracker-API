@@ -57,6 +57,7 @@ public class TaskListServiceImpl implements TaskListService {
     LocalDateTime now = LocalDateTime.now();
     @Override
     public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
+
         if (null == taskList.getId()) {
             throw new IllegalArgumentException("Task list id can't be null!");
         }
@@ -82,5 +83,10 @@ public class TaskListServiceImpl implements TaskListService {
         existingTaskList.setDescription(taskList.getDescription());
         existingTaskList.setUpdated(now);
         return taskListRepository.save(existingTaskList);
+    }
+
+    @Override
+    public void deleteTaskListById(UUID taskListId) {
+        taskListRepository.deleteById(taskListId);
     }
 }
