@@ -4,6 +4,7 @@ import com.dexterv.tasktracker.controllers.GlobalExceptionHandler;
 import com.dexterv.tasktracker.domain.entities.TaskList;
 import com.dexterv.tasktracker.repositories.TaskListRepository;
 import com.dexterv.tasktracker.services.TaskListService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepository.findById(id);
     }
 
-    LocalDateTime now = LocalDateTime.now();
+    @Transactional
     @Override
     public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
 
@@ -81,7 +82,7 @@ public class TaskListServiceImpl implements TaskListService {
 
         existingTaskList.setTitle(taskList.getTitle());
         existingTaskList.setDescription(taskList.getDescription());
-        existingTaskList.setUpdated(now);
+        existingTaskList.setUpdated(LocalDateTime.now());
         return taskListRepository.save(existingTaskList);
     }
 

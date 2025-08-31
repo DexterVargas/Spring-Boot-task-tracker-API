@@ -25,7 +25,10 @@ public class TaskController {
     // Get all tasks
     @GetMapping
     public List<TaskDto> getAllTasks(@PathVariable("task_list_id") UUID taskListId) {
-        return taskService.getAllTasksByTaskListId(taskListId).stream().map(taskMapper::toDto).toList();
+        return taskService.getAllTasksByTaskListId(taskListId)
+                .stream()
+                .map(taskMapper::toDto)
+                .toList();
     }
 
     // Add new task
@@ -42,7 +45,8 @@ public class TaskController {
             @PathVariable("task_list_id") UUID taskListId,
             @PathVariable("task_id") UUID taskId){
 
-        return taskService.getTaskByTaskListId(taskListId, taskId).map(taskMapper::toDto);
+        return taskService.getTaskByTaskListId(taskListId, taskId)
+                .map(taskMapper::toDto);
 
     }
 
@@ -52,7 +56,11 @@ public class TaskController {
             @PathVariable("task_id") UUID taskId,
             @RequestBody TaskDto taskDto
     ){
-        Task updatedTask = taskService.updateTask(taskListId, taskId, taskMapper.fromDto(taskDto));
+        Task updatedTask = taskService.updateTask(
+                taskListId,
+                taskId,
+                taskMapper.fromDto(taskDto)
+        );
 
         return taskMapper.toDto(updatedTask);
     }

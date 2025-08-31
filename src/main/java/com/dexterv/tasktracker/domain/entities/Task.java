@@ -2,9 +2,7 @@ package com.dexterv.tasktracker.domain.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,7 +23,7 @@ public class Task {
 
 
     @Column(name="due_date")
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
 
     @Column(name="status", nullable = false)
     private TaskStatus status;
@@ -46,7 +44,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(UUID id, String title, String description, LocalDate dueDate, TaskStatus status, TaskPriority priority, TaskList taskList, LocalDateTime created, LocalDateTime updated) {
+    public Task(UUID id, String title, String description, LocalDateTime dueDate, TaskStatus status, TaskPriority priority, TaskList taskList, LocalDateTime created, LocalDateTime updated) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -82,11 +80,11 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDate getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 

@@ -8,9 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TaskService {
-
-    Optional<Task> getTaskByTaskListId(UUID taskListId, UUID taskId);
     List<Task> getAllTasksByTaskListId(UUID taskListId);
+    Optional<Task> getTaskByTaskListId(UUID taskListId, UUID taskId);
     Task createTask(UUID taskListId, Task task);
     Task updateTask(UUID taskListId, UUID taskId, Task task);
     void deleteTask(UUID taskListId, UUID taskId);
