@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(path="/task-lists/{task_list_id}/tasks")
+@CrossOrigin(origins = "http://localhost:8080")  // 👈 allow your frontend
 public class TaskController {
 
     private final TaskService taskService;

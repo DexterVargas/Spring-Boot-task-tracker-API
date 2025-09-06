@@ -77,7 +77,9 @@ public class TaskListMapperImpl implements TaskListMapper {
                 Optional.ofNullable(taskList.getTasks())
                         .map(tasks ->
                                 tasks.stream().map(taskMapper::toDto).toList())
-                        .orElse(null)
+                        .orElse(null),
+                taskList.getCreated(),
+                taskList.getUpdated()
         );
     }
 
